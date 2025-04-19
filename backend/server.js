@@ -1,34 +1,38 @@
-const express = require('express');
-const dotenv = require('dotenv');
+const express = require('express')
+const dotenv = require('dotenv')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const path = require('path')
-const { MongoClient } = require('mongodb');
-const { ObjectId } = require('mongodb');
-const productRoutes = require('./routes/productRoutes')
-const Product = require('../models/Product')
-const router = express.Router()
+const Product = require('./models/Product')
 
 dotenv.config()
 
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use('/api/products', productRoutes)
 
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('✅ MongoDB connected'))
+.catch(err => console.error('❌ MongoDB connection error:', err))
+
+// Test route
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from backend' })
 })
 
-
-// @route   GET /api/products
-router.get('/', async (req, res) => {
+// Products route
+app.get('/api/products', async (req, res) => {
+  try {
     const products = await Product.find()
     res.json(products)
-  })
+  } catch (err) {
+    res.status(500).json({ error: 'Something went wrong' })
+  }
+})
 
-
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5050
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`)
 })
