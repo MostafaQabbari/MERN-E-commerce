@@ -3,12 +3,11 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const Product = require('./models/Product')
+const authRoutes = require('./routes/authRoutes')
 
 dotenv.config()
 
 const app = express()
-app.use(cors())
-app.use(express.json())
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -16,6 +15,13 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 .then(() => console.log('✅ MongoDB connected'))
 .catch(err => console.error(err))
+
+
+app.use(cors())
+app.use(express.json())
+app.use('/api', authRoutes)
+
+
 
 app.get('/api/products', async (req, res) => {
   const products = await Product.find()
