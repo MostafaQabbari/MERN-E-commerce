@@ -3,6 +3,9 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import HomePage from './pages/HomePage'
 import Navbar from './components/Navbar'
+import Cart from './pages/Cart'
+import PrivateRoute from './components/PrivateRoute'
+
 
 function App() {
   return (
@@ -12,7 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        {/* Add Cart later */}
+        <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
       </Routes>
     </Router>
   )

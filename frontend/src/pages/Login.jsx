@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
+import { useAuth } from '../context/AuthContext'
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
   const navigate = useNavigate()
-
+  const { setUser } = useAuth()
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
@@ -15,6 +17,8 @@ export default function Login() {
     try {
       const res = await axios.post('/api/login', form)
       localStorage.setItem('token', res.data.token)
+      const decoded = jwtDecode(res.data.token)
+      setUser(decoded)
       navigate('/')
     } catch (err) {
       alert('Login failed')
