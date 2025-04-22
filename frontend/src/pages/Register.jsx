@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '' })
@@ -28,8 +28,12 @@ export default function Register() {
         <input name="name" placeholder="Name" onChange={handleChange} className="w-full p-2 border rounded" />
         <input name="email" placeholder="Email" onChange={handleChange} className="w-full p-2 border rounded" />
         <input type="password" name="password" placeholder="Password" onChange={handleChange} className="w-full p-2 border rounded" />
-        <button className="w-full bg-blue-600 text-white py-2 rounded">Register</button>
+        <button className="w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700">Register</button>
       </form>
+      <p className="text-sm mt-4 text-center">
+        Already have an account?{' '}
+        <Link to="/login" className="text-blue-600 hover:underline">Login here</Link>
+      </p>
     </div>
   )
 }

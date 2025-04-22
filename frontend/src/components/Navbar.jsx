@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
 
 export default function Navbar() {
   const [search, setSearch] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
   const { user, setUser } = useAuth()
+  const { cartItems } = useCart()
 
   const handleLogout = () => {
     localStorage.removeItem('token')
@@ -29,7 +31,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Center: Search bar */}
+        {/* Center: Search bar
         <form onSubmit={handleSearch} className="hidden md:flex w-1/2">
           <select className="rounded-l px-2 text-black">
             <option>All</option>
@@ -46,7 +48,7 @@ export default function Navbar() {
           <button className="bg-yellow-400 px-3 rounded-r text-black hover:bg-yellow-300">
             🔍
           </button>
-        </form>
+        </form> */}
 
         {/* Right: Nav Links */}
         <div className="hidden md:flex space-x-6 text-sm items-center">
@@ -66,7 +68,9 @@ export default function Navbar() {
             <div className="font-bold">& Orders</div>
           </Link>
           <Link to="/cart" className="relative">
-            <span className="absolute -top-2 -right-2 bg-yellow-400 text-black rounded-full px-2 text-xs">0</span>
+            <span className="absolute -top-2 -right-2 bg-yellow-400 text-black rounded-full px-2 text-xs">
+              {cartItems.reduce((sum, item) => sum + item.qty, 0)}
+            </span>
             <div className="text-2xl">🛒</div>
             <div className="font-bold">Cart</div>
           </Link>
@@ -102,10 +106,16 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/login" className="block">🔐 Login</Link>
-              <Link to="/register" className="block">📝 Register</Link>
+              <Link to="/login" className="hover:underline">
+                <div>Hello, sign in</div>
+                <div className="font-bold">Login</div>
+              </Link>
+              <Link to="/register" className="hover:underline font-bold">
+                Register
+              </Link>
             </>
           )}
+
         </div>
       )}
     </nav>

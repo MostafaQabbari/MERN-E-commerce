@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import { useAuth } from '../context/AuthContext'
+
+
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
@@ -31,8 +33,14 @@ export default function Login() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input name="email" placeholder="Email" onChange={handleChange} className="w-full p-2 border rounded" />
         <input type="password" name="password" placeholder="Password" onChange={handleChange} className="w-full p-2 border rounded" />
-        <button className="w-full bg-blue-600 text-white py-2 rounded">Login</button>
+        <button className="w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700">Login</button>
       </form>
+      <p className="text-sm mt-4 text-center">
+        Don't have an account?{' '}
+        <Link to="/register" className="text-blue-600 hover:underline">Register here</Link>
+      </p>
+
     </div>
+    
   )
 }
