@@ -7,8 +7,16 @@ const productSchema = new mongoose.Schema({
   category: String,
   description: String,
   countInStock: Number,
-  rating: Number,
-  numReviews: Number,
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  numReviews: {
+    type: Number,
+    default: 0,
+  },
+}, {
+  timestamps: true,
 })
 
 module.exports = mongoose.model('Product', productSchema)

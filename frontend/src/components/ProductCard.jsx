@@ -1,12 +1,19 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart()
+  const { user } = useAuth()
+  const navigate = useNavigate()
 
   const handleAddToCart = (e) => {
     e.preventDefault() // prevent navigating to product page
-    addToCart(product)
+    if (!user) {
+      navigate('/login')
+    } else {
+      addToCart(product)
+    }
   }
 
   return (

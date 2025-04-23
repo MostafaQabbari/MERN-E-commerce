@@ -101,7 +101,7 @@ export default function Navbar() {
             </Link>
             <Link to="/cart" className="relative">
               <span className="absolute -top-2 -right-2 bg-yellow-400 text-black rounded-full px-2 text-xs">
-                {cartItems.reduce((sum, item) => sum + item.qty, 0)}
+              {user ? cartItems.reduce((sum, item) => sum + item.qty, 0) : 0}
               </span>
               <div className="text-2xl">🛒</div>
               <div className="font-bold">Cart</div>
