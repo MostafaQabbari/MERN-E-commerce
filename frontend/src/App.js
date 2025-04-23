@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Cart from './pages/Cart'
 import PrivateRoute from './components/PrivateRoute'
 import ProductPage from './pages/ProductPage'
+import SearchPage from './pages/SearchPage'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
     </>
   )
