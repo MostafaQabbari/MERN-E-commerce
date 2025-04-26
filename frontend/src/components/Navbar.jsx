@@ -6,12 +6,11 @@ import { jwtDecode } from 'jwt-decode'
 
 export default function Navbar() {
   const [search, setSearch] = useState('')
-  const [category, setCategory] = useState('All')
+  const [category] = useState('All')
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
   const { user, setUser } = useAuth()
   const { cartItems } = useCart()
-
 
   useEffect(() => {
     if (!user) {
@@ -26,8 +25,6 @@ export default function Navbar() {
       }
     }
   }, [user, setUser])
-
-
 
   const handleLogout = () => {
     localStorage.removeItem('token')
@@ -45,34 +42,33 @@ export default function Navbar() {
       <nav className="bg-teal-600 text-white p-4 sticky top-0 z-50">
         <div className="flex justify-between items-center">
           {/* Left: Logo */}
-          <div className="flex items-center space-x-4">
-            <Link to="/" className="text-2xl font-bold text-yellow-300">E-store</Link>
+          <div className="flex items-center space-x-5">
+            <Link to="/" className="flex items-center space-x-2">
+              <img src="/e-shopia.png" alt="E-shopia logo" className="h-16 w-auto" />
+              <span className="text-xl font-bold text-yellow-300 hidden sm:inline"></span>
+            </Link>
           </div>
 
-          {/* Center: Search bar */}
-          <form onSubmit={handleSearch} className="hidden md:flex w-1/2">
-            <input
-              type="text"
-              placeholder="Search"
-              className="flex-grow px-3 py-1 text-black"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="text-black px-2"
-            >
-              <option value="All">All</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Fashion">Fashion</option>
-              <option value="Home">Home</option>
-              <option value="Games">Games</option>
-            </select>
-            <button className="bg-yellow-400 px-3 rounded-r text-black hover:bg-yellow-300">
-              🔍
-            </button>
-          </form>
+          {/* Center: Page Links and Search */}
+          <div className="flex-1 flex justify-center items-center space-x-6">
+            <div className="flex space-x-4 text-sm">
+              <Link to="/" className="hover:underline">Home</Link>
+              <Link to="/about" className="hover:underline">About Us</Link>
+              <Link to="/contact" className="hover:underline">Contact</Link>
+            </div>
+            <form onSubmit={handleSearch} className="flex max-w-[40%]">
+              <input
+                type="text"
+                placeholder="Search"
+                className="flex-grow px-3 py-1 text-black"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button className="bg-yellow-400 px-3 rounded-r text-black hover:bg-yellow-300">
+                🔍
+              </button>
+            </form>
+          </div>
 
           {/* Right: Nav Links */}
           <div className="hidden md:flex space-x-6 text-sm items-center">
@@ -96,12 +92,11 @@ export default function Navbar() {
               </>
             )}
             <Link to="/orders">
-              <div>Returns</div>
-              <div className="font-bold">& Orders</div>
+              <div className="font-bold">Orders</div>
             </Link>
             <Link to="/cart" className="relative">
               <span className="absolute -top-2 -right-2 bg-yellow-400 text-black rounded-full px-2 text-xs">
-              {user ? cartItems.reduce((sum, item) => sum + item.qty, 0) : 0}
+                {user ? cartItems.reduce((sum, item) => sum + item.qty, 0) : 0}
               </span>
               <div className="text-2xl">🛒</div>
               <div className="font-bold">Cart</div>
@@ -125,17 +120,6 @@ export default function Navbar() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="text-black px-2"
-              >
-                <option value="All">All</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Fashion">Fashion</option>
-                <option value="Home">Home</option>
-                <option value="Games">Games</option>
-              </select>
               <button className="bg-yellow-400 px-3 rounded-r text-black">🔍</button>
             </form>
 
