@@ -9,6 +9,7 @@ services:
       - ./backend/.env
     depends_on:
       - mongo
+    restart: always
 
   frontend:
     build: ./frontend
@@ -16,6 +17,7 @@ services:
       - '3000:3000'
     stdin_open: true
     tty: true
+    restart: always
 
   mongo:
     image: mongo

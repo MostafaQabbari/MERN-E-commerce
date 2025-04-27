@@ -150,7 +150,7 @@ export default function Navbar() {
           <Link to="/category/electronics" className="hover:underline">Electronics</Link>
           <Link to="/category/fashion" className="hover:underline">Fashion</Link>
           <Link to="/category/games" className="hover:underline">Games</Link>
-          <Link to="/category/home" className="hover:underline">Home</Link>
+          <Link to="/category/home" className="hover:underline">Furniture</Link>
           <Link to="/bestsellers" className="hover:underline">Best Sellers</Link>
           <Link to="/categories" className="hover:underline">Categories</Link>
           <Link to="/deals" className="hover:underline">Deals</Link>
