@@ -1,6 +1,6 @@
 # MERN-E-commerce
 
-# E-Commerce Platform (MERN + TypeScript + FullStack)
+# E-Commerce Platform (MERN + JavaScript + FullStack)
 
 A full-featured E-Commerce platform built with a modern technology stack using:
 
