@@ -8,7 +8,7 @@ A full-featured E-Commerce platform built with a modern technology stack using:
 - Node.js + Express + TypeScript (Backend API)
 - MongoDB (Database)
 - JWT Authentication (Users + Admin)
-- Chakra UI (Frontend styling)
+- Tailwind (Frontend styling)
 - Stripe or Payment Integration (Planned)
 - Admin Dashboard (Planned)
 
@@ -34,9 +34,7 @@ This project is designed to be enterprise-ready and used for real world producti
 
 ### Frontend
 
-- React.js (with TypeScript)
-- Next.js (optional future upgrade)
-- Chakra UI (UI framework)
+- React.js (with JavaScript)
 - React Router
 - Axios
 
@@ -44,7 +42,7 @@ This project is designed to be enterprise-ready and used for real world producti
 
 - Node.js
 - Express.js
-- TypeScript
+- JavaScript
 - MongoDB with Mongoose
 - JWT (Authentication)
 - Bcrypt (Password hashing)
