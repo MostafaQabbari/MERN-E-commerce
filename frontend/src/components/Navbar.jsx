@@ -54,7 +54,7 @@ export default function Navbar() {
             <div className="flex space-x-4 text-sm">
               <Link to="/" className="hover:underline">Home</Link>
               <Link to="/about" className="hover:underline">About Us</Link>
-              <Link to="/contact" className="hover:underline">Contact</Link>
+              <Link to="/contact" className="hover:underline">Contact Us</Link>
             </div>
             <form onSubmit={handleSearch} className="flex max-w-[40%]">
               <input
