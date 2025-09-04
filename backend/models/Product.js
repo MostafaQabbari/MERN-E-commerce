@@ -1,22 +1,28 @@
-const mongoose = require('mongoose')
+// backend/models/Product.js
+import mongoose from "mongoose"
 
-const productSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  price: Number,
-  category: String,
-  description: String,
-  countInStock: Number,
-  rating: {
-    type: Number,
-    default: 0,
+const productSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    image: { type: String, required: true },
+    description: { type: String, required: true },
+    brand: { type: String },
+    category: { type: String },
+    price: { type: Number, required: true },
+    countInStock: { type: Number, required: true, default: 0 },
+    reviews: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        rating: { type: Number, required: true },
+        comment: { type: String, required: true },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
   },
-  numReviews: {
-    type: Number,
-    default: 0,
-  },
-}, {
-  timestamps: true,
-})
+  {
+    timestamps: true,
+  }
+)
 
-module.exports = mongoose.model('Product', productSchema)
+const Product = mongoose.model("Product", productSchema)
+export default Product
