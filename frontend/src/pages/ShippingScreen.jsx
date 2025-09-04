@@ -1,90 +1,103 @@
 // src/pages/ShippingScreen.jsx
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ShippingScreen() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    fullName: '',
-    address: '',
-    city: '',
-    postalCode: '',
-    country: ''
-  })
+  const [fullName, setFullName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+  useEffect(() => {
+    // load saved address if exists
+    const savedAddress = localStorage.getItem("shippingAddress");
+    if (savedAddress) {
+      const addr = JSON.parse(savedAddress);
+      setFullName(addr.fullName || "");
+      setAddress(addr.address || "");
+      setCity(addr.city || "");
+      setPostalCode(addr.postalCode || "");
+      setCountry(addr.country || "");
+    }
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // TODO: Save shipping info to Context or LocalStorage
-    console.log('Shipping Info:', form)
-    navigate('/payment') // go to next step
-  }
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    const shippingData = {
+      fullName,
+      address,
+      city,
+      postalCode,
+      country,
+    };
+
+    // ✅ Save to localStorage properly
+    localStorage.setItem("shippingAddress", JSON.stringify(shippingData));
+
+    // ✅ Redirect to payment page
+    navigate("/payment");
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 p-6 flex justify-center items-center">
       <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow-md w-full max-w-md"
+        onSubmit={submitHandler}
+        className="bg-white shadow rounded-lg p-6 w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-4">🚚 Shipping Address</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">🚚 Shipping</h2>
 
         <input
           type="text"
-          name="fullName"
           placeholder="Full Name"
-          value={form.fullName}
-          onChange={handleChange}
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
           className="w-full border p-2 mb-3 rounded"
           required
         />
         <input
           type="text"
-          name="address"
           placeholder="Address"
-          value={form.address}
-          onChange={handleChange}
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
           className="w-full border p-2 mb-3 rounded"
           required
         />
         <input
           type="text"
-          name="city"
           placeholder="City"
-          value={form.city}
-          onChange={handleChange}
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
           className="w-full border p-2 mb-3 rounded"
           required
         />
         <input
           type="text"
-          name="postalCode"
           placeholder="Postal Code"
-          value={form.postalCode}
-          onChange={handleChange}
+          value={postalCode}
+          onChange={(e) => setPostalCode(e.target.value)}
           className="w-full border p-2 mb-3 rounded"
           required
         />
         <input
           type="text"
-          name="country"
           placeholder="Country"
-          value={form.country}
-          onChange={handleChange}
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
           className="w-full border p-2 mb-3 rounded"
           required
         />
 
         <button
           type="submit"
-          className="w-full bg-teal-600 text-white p-2 rounded hover:bg-teal-700"
+          className="mt-6 w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition"
         >
-          Continue to Payment →
+          Continue
         </button>
       </form>
     </div>
-  )
+  );
 }

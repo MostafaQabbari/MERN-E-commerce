@@ -10,6 +10,8 @@ import SearchPage from './pages/SearchPage'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import ShippingScreen from './pages/ShippingScreen'
+import PaymentScreen from "./pages/PaymentScreen";
+import PlaceOrderScreen from "./pages/PlaceOrderScreen";
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/payment" element={<PaymentScreen />} />
+        <Route path="/placeorder" element={<PlaceOrderScreen />} />
 
       </Routes>
     </>
