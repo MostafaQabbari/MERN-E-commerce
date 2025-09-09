@@ -1,106 +1,68 @@
-# MERN-E-commerce
+# MERN E-Commerce
 
-# E-Commerce Platform (MERN + JavaScript + FullStack)
-
-A full-featured E-Commerce platform built with a modern technology stack using:
-
-- React + TypeScript (Frontend)
-- Node.js + Express + TypeScript (Backend API)
-- MongoDB (Database)
-- JWT Authentication (Users + Admin)
-- Tailwind (Frontend styling)
-- Stripe or Payment Integration (Planned)
-- Admin Dashboard (Planned)
-
-This project is designed to be enterprise-ready and used for real world production with real users.
+A full-featured **E-Commerce platform** built with the MERN stack.  
+This project was created as a portfolio-ready application to demonstrate full-stack development skills.
 
 ---
 
-## Features
+## 🚀 Live Demo
 
-### User
-
-✅ User registration and login (JWT + bcrypt password security)  
-✅ Product listing and browsing  
-✅ Product details page  
-✅ Add to cart and manage cart  
-✅ Checkout (with order summary)  
-✅ Protected routes → cart, profile, orders  
-✅ Order history
+👉 [Live Website Link Here – to be added after deployment]
 
 ---
 
-## Tech Stack
+## ✨ Features
 
-### Frontend
+### User Features
+- ✅ User registration and login (JWT authentication + bcrypt password security)  
+- ✅ Product listing and browsing  
+- ✅ Product details page  
+- ✅ Add to cart and manage cart  
+- ✅ Checkout flow: **Cart → Shipping → Payment → Place Order**  
+- ✅ Dummy payment (Cash on Delivery)  
+- ✅ Order history page  
+- ✅ Protected routes for cart, orders, and checkout  
 
-- React.js (with JavaScript)
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend**
+- React.js (JavaScript)
 - React Router
 - Axios
+- TailwindCSS (UI styling)
 
-### Backend
-
+**Backend**
 - Node.js
 - Express.js
-- JavaScript
 - MongoDB with Mongoose
-- JWT (Authentication)
-- Bcrypt (Password hashing)
+- JWT for authentication
+- Bcrypt for password hashing
 
----
+**Others**
+- Docker & Docker Compose (for running frontend + backend together)
 
-## Project Structure
+## ⚡ Getting Started
 
-/ecommerce-backend
-├── src/
-│ ├── controllers/
-│ ├── models/
-│ ├── routes/
-│ ├── middlewares/
-│ └── utils/
-├── .env
-├── package.json
-└── tsconfig.json
-
-/ecommerce-frontend
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── context/
-│ └── utils/
-├── public/
-├── package.json
-└── tsconfig.json
-
-
----
-
-## Getting Started
-
-### Backend
+### Run with Docker (Recommended)
 
 ```bash
+docker-compose up --build
+
+This will build and start both the frontend and backend containers.
+App will be available at http://localhost:3000
+.
+
+Run Without Docker
+Backend
 cd ecommerce-backend
 npm install
 npm run dev
-Add your MongoDB URI + JWT secret in .env
+
 Frontend
 cd ecommerce-frontend
 npm install
-npm run dev
-Update .env if needed to point to backend API URL.
-Deployment
+npm start
 
-Planned deployment targets:
-
-Backend → Railway / Render / DigitalOcean
-Frontend → Vercel / Netlify
-Both apps are easily dockerizable.
-
-License
-
-MIT License.
-
-Contributors
-
-Moustafa Saad→ Full Stack Developer 
