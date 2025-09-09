@@ -11,16 +11,21 @@ const initialState = {
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM": {
-      const existItem = state.cartItems.find((x) => x._id === action.payload._id);
+      const item = {
+        ...action.payload,
+        qty: Number(action.payload.qty) || 1, // ✅ always ensure qty is a number
+      };
+
+      const existItem = state.cartItems.find((x) => x._id === item._id);
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((x) =>
-            x._id === existItem._id ? action.payload : x
+            x._id === existItem._id ? { ...x, qty: x.qty + item.qty } : x
           ),
         };
       } else {
-        return { ...state, cartItems: [...state.cartItems, action.payload] };
+        return { ...state, cartItems: [...state.cartItems, item] };
       }
     }
     case "REMOVE_ITEM":
@@ -59,8 +64,15 @@ export function CartProvider({ children }) {
     dispatch({ type: "CLEAR_CART" });
   };
 
+  // ✅ Prevent NaN by forcing qty and price to numbers
   const total = state.cartItems.reduce(
-    (acc, item) => acc + item.qty * item.price,
+    (acc, item) => acc + (Number(item.qty) || 0) * (Number(item.price) || 0),
+    0
+  );
+
+  // ✅ Add totalItems for the badge
+  const totalItems = state.cartItems.reduce(
+    (acc, item) => acc + (Number(item.qty) || 0),
     0
   );
 
@@ -72,6 +84,7 @@ export function CartProvider({ children }) {
         removeFromCart,
         clearCart,
         total,
+        totalItems, // ✅ use this for the cart badge
       }}
     >
       {children}

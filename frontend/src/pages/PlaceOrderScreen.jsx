@@ -43,22 +43,38 @@ export default function PlaceOrderScreen() {
         return navigate("/login");
       }
 
-      const { data } = await axios.post(
-        "/api/orders",
-        {
-          orderItems: cartItems,
-          shippingAddress,
-          paymentMethod,
-          itemsPrice: total,
-          shippingPrice: total > 100 ? 0 : 10,
-          totalPrice: total + (total > 100 ? 0 : 10),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      // // ✅ Map cartItems so each one includes "product"
+      // const orderItems = cartItems.map((item) => ({
+      //   name: item.name,
+      //   qty: item.qty,
+      //   image: item.image,
+      //   price: item.price,
+      //   product: item._id, // required by backend
+      // }));
+
+const { data } = await axios.post(
+  "/api/orders",
+  {
+    orderItems: cartItems.map((item) => ({
+      name: item.name,
+      qty: item.qty,
+      image: item.image,
+      price: item.price,
+      product: item._id, // ✅ required for schema
+    })),
+    shippingAddress,
+    paymentMethod,
+    itemsPrice: total,
+    shippingPrice: total > 100 ? 0 : 10,
+    totalPrice: total + (total > 100 ? 0 : 10),
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+
 
       console.log("✅ Order placed:", data);
       clearCart();
@@ -142,8 +158,7 @@ export default function PlaceOrderScreen() {
             <li className="flex justify-between font-bold text-lg">
               <span>Total</span>
               <span>
-                €
-                {(total + (total > 100 ? 0 : 10)).toFixed(2)}
+                €{(total + (total > 100 ? 0 : 10)).toFixed(2)}
               </span>
             </li>
           </ul>

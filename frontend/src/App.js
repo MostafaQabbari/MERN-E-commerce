@@ -12,6 +12,7 @@ import ContactUs from './pages/ContactUs'
 import ShippingScreen from './pages/ShippingScreen'
 import PaymentScreen from "./pages/PaymentScreen";
 import PlaceOrderScreen from "./pages/PlaceOrderScreen";
+import OrdersPage from "./pages/OrdersPage"
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/placeorder" element={<PlaceOrderScreen />} />
+        <Route path="/orders" element={<OrdersPage />} />
 
       </Routes>
     </>

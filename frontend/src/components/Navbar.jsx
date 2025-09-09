@@ -10,7 +10,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
   const { user, setUser } = useAuth()
-  const { cartItems } = useCart()
+  const { totalItems } = useCart() // ✅ use totalItems from CartContext
 
   useEffect(() => {
     if (!user) {
@@ -96,7 +96,7 @@ export default function Navbar() {
             </Link>
             <Link to="/cart" className="relative">
               <span className="absolute -top-2 -right-2 bg-yellow-400 text-black rounded-full px-2 text-xs">
-                {user ? cartItems.reduce((sum, item) => sum + item.qty, 0) : 0}
+                {totalItems} {/* ✅ Now safe, no NaN */}
               </span>
               <div className="text-2xl">🛒</div>
               <div className="font-bold">Cart</div>
@@ -123,7 +123,7 @@ export default function Navbar() {
               <button className="bg-yellow-400 px-3 rounded-r text-black">🔍</button>
             </form>
 
-            <Link to="/cart" className="block">🛒 Cart</Link>
+            <Link to="/cart" className="block">🛒 Cart ({totalItems})</Link> {/* ✅ here too */}
             <Link to="/orders" className="block">📦 Orders</Link>
 
             {user ? (
@@ -144,7 +144,7 @@ export default function Navbar() {
         )}
       </nav>
 
-      {/* Sub-navbar */}
+      {/* Sub-navbar
       <div className="bg-teal-700 text-white text-sm px-4 py-2 flex justify-between items-center">
         <div className="flex gap-6">
           <Link to="/category/electronics" className="hover:underline">Electronics</Link>
@@ -155,7 +155,7 @@ export default function Navbar() {
           <Link to="/categories" className="hover:underline">Categories</Link>
           <Link to="/deals" className="hover:underline">Deals</Link>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

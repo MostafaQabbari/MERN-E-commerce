@@ -43,12 +43,13 @@ router.post("/", protect, async (req, res) => {
 // @desc   Get logged-in user orders
 // @route  GET /api/orders/myorders
 // @access Private
+// GET logged-in user's orders
 router.get("/myorders", protect, async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user._id })
     res.json(orders)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch orders" })
   }
 })
 
