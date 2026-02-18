@@ -18,7 +18,7 @@ export default function Navbar() {
       if (token) {
         try {
           const decoded = jwtDecode(token)
-          setUser({ name: decoded.name, email: decoded.email })
+          setUser({ name: decoded.name, email: decoded.email, isAdmin: decoded.isAdmin })
         } catch (err) {
           console.error('Failed to decode token:', err)
         }
@@ -79,6 +79,11 @@ export default function Navbar() {
                   <span>Hello, {user.name || user.email || 'User'}</span>
                 </div>
                 <button onClick={handleLogout} className="text-red-400">Logout</button>
+                {user.isAdmin && (
+                  <Link to="/admin" className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-lg text-sm font-bold hover:bg-yellow-300">
+                    Admin
+                  </Link>
+                )}
               </>
             ) : (
               <>

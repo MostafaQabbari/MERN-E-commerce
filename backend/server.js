@@ -8,7 +8,9 @@ import productRoutes from "./routes/productRoutes.js"
 import authRoutes from "./routes/authRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
 import reviewRoutes from "./routes/reviewRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
 import Product from "./models/Product.js"  // ✅ ESM import
+
 
 dotenv.config()
 
@@ -23,6 +25,7 @@ app.use("/api", authRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/reviews", reviewRoutes)
 app.use("/api/orders", orderRoutes)
+app.use('/api/admin', adminRoutes);
 
 // Database connection
 const connectToDB = async () => {

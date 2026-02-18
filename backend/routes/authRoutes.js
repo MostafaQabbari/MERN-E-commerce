@@ -20,11 +20,15 @@ router.post("/register", async (req, res) => {
   const user = new User({ name, email, password: hashedPassword })
   await user.save()
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
+  const token = jwt.sign(
+    { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  )
 
   res.json({
     token,
-    user: { id: user._id, name: user.name, email: user.email },
+    user: { id: user._id, name: user.name, email: user.email , isAdmin: user.isAdmin },
   })
 })
 
@@ -42,7 +46,11 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ message: "Invalid email or password" })
   }
 
-  const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET)
+  const token = jwt.sign(
+    { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  )
 
   res.json({
     token,
