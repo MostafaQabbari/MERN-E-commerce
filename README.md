@@ -57,12 +57,12 @@ App will be available at http://localhost:3000
 
 Run Without Docker
 Backend
-cd ecommerce-backend
+cd backend
 npm install
 npm run dev
 
 Frontend
-cd ecommerce-frontend
+cd frontend
 npm install
 npm start
 
