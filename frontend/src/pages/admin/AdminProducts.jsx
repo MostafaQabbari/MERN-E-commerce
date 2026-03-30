@@ -19,7 +19,7 @@ const AdminProducts = () => {
   const headers = { "Content-Type": "application/json", Authorization: `Bearer ${token}` };
 
   const fetchProducts = () => {
-    fetch("http://localhost:5050/api/admin/products", { headers })
+    fetch("API_BASE/api/admin/products", { headers })
       .then(r => r.json())
       .then(data => { setProducts(data); setLoading(false); });
   };
@@ -30,8 +30,8 @@ const AdminProducts = () => {
     e.preventDefault();
     setSaving(true);
     const url = editId
-      ? `http://localhost:5050/api/admin/products/${editId}`
-      : "http://localhost:5050/api/admin/products";
+      ? `API_BASE/api/admin/products/${editId}`
+      : "API_BASE/api/admin/products";
     const method = editId ? "PUT" : "POST";
     await fetch(url, { method, headers, body: JSON.stringify({ ...form, price: Number(form.price), countInStock: Number(form.countInStock) }) });
     setSaving(false);
@@ -49,7 +49,7 @@ const AdminProducts = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this product?")) return;
-    await fetch(`http://localhost:5050/api/admin/products/${id}`, { method: "DELETE", headers });
+    await fetch(`API_BASE/api/admin/products/${id}`, { method: "DELETE", headers });
     fetchProducts();
   };
 

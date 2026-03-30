@@ -14,7 +14,7 @@ export default function OrdersPage() {
 
     const fetchOrders = async () => {
       try {
-        const res = await fetch("http://localhost:5050/api/orders/myorders", {
+        const res = await fetch("API_BASE/api/orders/myorders", {
           headers: { Authorization: `Bearer ${token}` },
         })
         if (!res.ok) throw new Error("Failed to fetch orders")
