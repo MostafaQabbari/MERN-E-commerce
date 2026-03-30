@@ -10,7 +10,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
   const { user, setUser } = useAuth()
-  const { totalItems } = useCart() // ✅ use totalItems from CartContext
+  const { totalItems, clearCart } = useCart() // ✅ use totalItems from CartContext
 
   useEffect(() => {
     if (!user) {
@@ -28,6 +28,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    clearCart()
     setUser(null)
     navigate('/login')
   }
