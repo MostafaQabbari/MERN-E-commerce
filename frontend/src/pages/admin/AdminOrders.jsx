@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+// import { useAuth } from "../../context/AuthContext";
 import API_BASE from "../../config";
 
 const AdminOrders = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const token = localStorage.getItem('token');
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,8 @@ const AdminOrders = () => {
       .then(data => { setOrders(data); setLoading(false); });
   };
 
-  useEffect(() => { fetchOrders(); }, []);
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => { fetchOrders(); }, []);
 
   const markPaid = async (id) => {
     await fetch(`${API_BASE}/api/admin/orders/${id}/pay`, { method: "PUT", headers });

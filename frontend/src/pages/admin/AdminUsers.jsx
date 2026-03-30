@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+// import { useAuth } from "../../context/AuthContext";
 import API_BASE from "../../config";
 
 const AdminUsers = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const token = localStorage.getItem('token');
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,8 @@ const AdminUsers = () => {
       .then(data => { setUsers(data); setLoading(false); });
   };
 
-  useEffect(() => { fetchUsers(); }, []);
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => { fetchUsers(); }, []);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this user?")) return;

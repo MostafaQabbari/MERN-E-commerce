@@ -1,6 +1,6 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+// import { useAuth } from "../../context/AuthContext";
 import API_BASE from "../../config";
 
 const emptyForm = {
@@ -8,7 +8,7 @@ const emptyForm = {
 };
 
 const AdminProducts = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
   const [showForm, setShowForm] = useState(false);
