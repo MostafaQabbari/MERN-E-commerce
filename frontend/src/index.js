@@ -6,6 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { BrowserRouter } from "react-router-dom";
+import axios from 'axios'
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5050'
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
