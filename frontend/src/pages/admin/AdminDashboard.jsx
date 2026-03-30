@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
 // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetch(`${API_BASE}/api/admin/stats`, {
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, [user]);
+  }, [token]);
 
   if (loading) return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
