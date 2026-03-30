@@ -9,7 +9,8 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetch(`${API_BASE}/api/admin/stats`, {
       headers: { Authorization: `Bearer ${token}` },

@@ -24,7 +24,7 @@ const AdminProducts = () => {
       .then(r => r.json())
       .then(data => { setProducts(data); setLoading(false); });
   };
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { fetchProducts(); }, []);
 
   const handleSubmit = async (e) => {
