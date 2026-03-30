@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import API_BASE from "../../config";
 
 const AdminOrders = () => {
   const { user } = useAuth();
