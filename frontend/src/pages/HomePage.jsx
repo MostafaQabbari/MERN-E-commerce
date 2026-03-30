@@ -4,14 +4,21 @@ import ProductCard from '../components/ProductCard'
 import Slider from '../components/Slider'
 import Footer from '../components/Footer'
 
+const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5050"
+
 export default function HomePage() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios.get('/api/products')
-      .then(res => setProducts(res.data))
+    axios.get(`${API_BASE}/api/products`)
+      .then(res => {
+        const data = res.data
+        setProducts(Array.isArray(data) ? data : data.products || [])
+      })
       .catch(err => console.error('❌ Could not fetch products:', err))
   }, [])
+  
+  // rest of your code stays the same
 
   return (
     <div className="min-h-screen bg-gray-100">
