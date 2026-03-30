@@ -11,7 +11,7 @@ const AdminOrders = () => {
   const headers = { Authorization: `Bearer ${token}` };
 
   const fetchOrders = () => {
-    fetch("API_BASE/api/admin/orders", { headers })
+    fetch(`${API_BASE}/api/admin/orders`, { headers })
       .then(r => r.json())
       .then(data => { setOrders(data); setLoading(false); });
   };
@@ -19,12 +19,12 @@ const AdminOrders = () => {
   useEffect(() => { fetchOrders(); }, []);
 
   const markPaid = async (id) => {
-    await fetch(`API_BASE/api/admin/orders/${id}/pay`, { method: "PUT", headers });
+    await fetch(`${API_BASE}/api/admin/orders/${id}/pay`, { method: "PUT", headers });
     fetchOrders();
   };
 
   const markDelivered = async (id) => {
-    await fetch(`API_BASE/api/admin/orders/${id}/deliver`, { method: "PUT", headers });
+    await fetch(`${API_BASE}/api/admin/orders/${id}/deliver`, { method: "PUT", headers });
     fetchOrders();
   };
 

@@ -10,7 +10,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("API_BASE/api/admin/stats", {
+    fetch(`${API_BASE}/api/admin/stats`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())

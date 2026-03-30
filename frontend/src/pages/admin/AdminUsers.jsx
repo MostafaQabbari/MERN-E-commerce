@@ -11,7 +11,7 @@ const AdminUsers = () => {
   const headers = { Authorization: `Bearer ${token}` };
 
   const fetchUsers = () => {
-    fetch("API_BASE/api/admin/users", { headers })
+    fetch(`${API_BASE}/api/admin/users`, { headers })
       .then(r => r.json())
       .then(data => { setUsers(data); setLoading(false); });
   };
@@ -20,7 +20,7 @@ const AdminUsers = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this user?")) return;
-    await fetch(`API_BASE/api/admin/users/${id}`, { method: "DELETE", headers });
+    await fetch(`${API_BASE}/api/admin/users/${id}`, { method: "DELETE", headers });
     fetchUsers();
   };
 
